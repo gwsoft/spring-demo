@@ -3,6 +3,13 @@ package pl.particle.gwsoft.response;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
 public class DummyResponse {
 
   @JsonProperty("dummyId")
@@ -15,43 +22,4 @@ public class DummyResponse {
   
   private Object object;
 
-  public long getId() {
-    return id;
-  }
-
-  public void setId(long id) {
-    this.id = id;
-  }
-
-  public String getText() {
-    return text;
-  }
-
-  public void setText(String text) {
-    this.text = text;
-  }
-
-  public boolean isCondition() {
-    return condition;
-  }
-
-  public void setCondition(boolean condition) {
-    this.condition = condition;
-  }
-
-  public Object getObject() {
-    return object;
-  }
-
-  public void setObject(Object object) {
-    this.object = object;
-  }
-
-  public DummyResponse(long id, String text, boolean condition, Object object) {
-    this.id = id;
-    this.text = text;
-    this.condition = condition;
-    this.object = object;
-  }
-  
 }
