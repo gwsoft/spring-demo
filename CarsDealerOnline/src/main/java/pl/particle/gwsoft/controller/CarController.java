@@ -1,11 +1,17 @@
 package pl.particle.gwsoft.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import pl.particle.gwsoft.entity.Car;
 import pl.particle.gwsoft.response.CarResponse;
+import pl.particle.gwsoft.service.CarService;
 
 @RestController
 @RequestMapping("/api/car")
@@ -27,9 +33,34 @@ public class CarController {
     return "Welcome in " + appName + "<br>" + "author: " + appAuthor;
   }
   
-  @GetMapping("/get")
+  @GetMapping("/getSample")
   public CarResponse getCar() {
-    CarResponse carResponse = new CarResponse(1, "hatchback", "Volvo", "silver", 10000, "used", 2015, 45000.0);
+    Car car = new Car();
+    car.setId(111);
+    car.setStyle("hatchback");
+    car.setColor("silver");
+    car.setMake("Volvo");
+    car.setMileage(10000);
+    car.setCondition("used");
+    car.setProductionYear(2015);
+    car.setPrice(45000.0);
+
+    CarResponse carResponse = new CarResponse(car);
     return carResponse;
+  }
+  
+  @Autowired
+  CarService carService;
+  
+  @GetMapping("/getAll")
+  public List<CarResponse> getAllCars() {
+    List<Car> carList = carService.getAllCars();
+    List<CarResponse> carResponseList = new ArrayList<CarResponse>();
+    
+    carList.stream().forEach(car -> {
+      carResponseList.add(new CarResponse(car));
+    });
+    
+    return carResponseList;
   }
 }
