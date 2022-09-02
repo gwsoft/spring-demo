@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import pl.particle.gwsoft.entity.Car;
 import pl.particle.gwsoft.repository.CarRepository;
+import pl.particle.gwsoft.request.CreateCarRequest;
 
 @Service
 public class CarService {
@@ -18,4 +19,9 @@ public class CarService {
     return carRepository.findAll();
   }
   
+  public Car createCar(CreateCarRequest createCarRequest) {
+    Car car = new Car(createCarRequest);
+    car = carRepository.save(car);
+    return car;
+  }
 }

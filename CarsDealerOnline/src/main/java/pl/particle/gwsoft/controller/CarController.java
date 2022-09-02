@@ -6,10 +6,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import pl.particle.gwsoft.entity.Car;
+import pl.particle.gwsoft.request.CreateCarRequest;
 import pl.particle.gwsoft.response.CarResponse;
 import pl.particle.gwsoft.service.CarService;
 
@@ -39,6 +42,7 @@ public class CarController {
     car.setId(111);
     car.setStyle("hatchback");
     car.setColor("silver");
+    car.setModel("");
     car.setMake("Volvo");
     car.setMileage(10000);
     car.setCondition("used");
@@ -62,5 +66,11 @@ public class CarController {
     });
     
     return carResponseList;
+  }
+  
+  @PostMapping("/create")
+  public CarResponse createCar(@RequestBody CreateCarRequest createCarRequest) {
+    Car car = carService.createCar(createCarRequest);
+    return new CarResponse(car);
   }
 }
