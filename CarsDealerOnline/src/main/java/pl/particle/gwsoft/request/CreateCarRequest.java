@@ -1,5 +1,7 @@
 package pl.particle.gwsoft.request;
 
+import javax.validation.constraints.NotBlank;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Getter;
@@ -10,6 +12,7 @@ import lombok.Setter;
 public class CreateCarRequest {
   
   @JsonProperty("car_style")
+  @NotBlank(message = "Wymagane pole 'style'")
   private String style;
   
   @JsonProperty("car_make")

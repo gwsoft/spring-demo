@@ -3,6 +3,8 @@ package pl.particle.gwsoft.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -69,7 +71,7 @@ public class CarController {
   }
   
   @PostMapping("/create")
-  public CarResponse createCar(@RequestBody CreateCarRequest createCarRequest) {
+  public CarResponse createCar(@Valid @RequestBody CreateCarRequest createCarRequest) {
     Car car = carService.createCar(createCarRequest);
     return new CarResponse(car);
   }
