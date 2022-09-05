@@ -45,4 +45,9 @@ public class CarService {
     
     return car;
   }
+  
+  public String deleteCar(long id) {
+    carRepository.deleteById(id);
+    return "Samochód usunięty";
+  }
 }
