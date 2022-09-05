@@ -9,12 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import pl.particle.gwsoft.entity.Car;
 import pl.particle.gwsoft.request.CreateCarRequest;
+import pl.particle.gwsoft.request.UpdateCarRequest;
 import pl.particle.gwsoft.response.CarResponse;
 import pl.particle.gwsoft.service.CarService;
 
@@ -75,4 +77,11 @@ public class CarController {
     Car car = carService.createCar(createCarRequest);
     return new CarResponse(car);
   }
+  
+  @PutMapping("/update")
+  public CarResponse updateCar(@Valid @RequestBody UpdateCarRequest updateCarRequest) {
+    Car car = carService.updateCar(updateCarRequest);
+    return new CarResponse(car);
+  }
+  
 }
